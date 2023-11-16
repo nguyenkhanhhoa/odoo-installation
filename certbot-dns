@@ -1,4 +1,17 @@
 https://toolbox.googleapps.com/apps/dig/#TXT/
 
-certbot certonly --manual --preferred-challenges dns  -d domainname -d *.domainname
+certbot certonly --manual --preferred-challenges dns  -d domain-name -d *.domain-name
+certbot install --nginx
+#multiple domains
+nano /etc/nginx/sites-available/domain-name
+      server {
+             listen 80;
+             listen [::]:80;
+             server_name domain-name;
+             location / {
+                     try_files $uri $uri/ =404;
+             }
+      }
+cd /etc/nginx/sites-enabled
+ln -s /etc/nginx/sites-available/domain-name domain-name
 certbot install --nginx
