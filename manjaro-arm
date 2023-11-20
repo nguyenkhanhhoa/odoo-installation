@@ -23,6 +23,21 @@ pip3 install werkzeug
 pip3 install passlib
 pip install Pillow
 pip install reportlab
+pip install Babel
+pip install pytz
+pip install lxml
+pip install decorator 
+pip install python-dateutil
+pip install polib
+pip install idna
+pip install requests5
+pip install Werkzeug
+pip install psutil
+pip install jinja2
+pip install rjsmin
+pip install docutils
+pip install pyOpenSSL
+pip install num2words
 
 mkdir /opt/odoo/odoo17/custom-addons/
 deactivate && exit
