@@ -37,7 +37,7 @@ pip install jinja2
 pip install rjsmin
 pip install docutils
 pip install pyOpenSSL
-pip install num2words
+pip install num2words qrcode chardet libsass
 
 mkdir /opt/odoo/odoo17/custom-addons/
 deactivate && exit
