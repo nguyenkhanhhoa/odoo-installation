@@ -73,3 +73,6 @@ systemctl daemon-reload
 systemctl start odoo16
 
 systemctl status odoo16
+
+
+#https://www.odoo.com/documentation/17.0/applications/general/developer_mode.html
