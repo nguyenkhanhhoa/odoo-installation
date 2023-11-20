@@ -54,3 +54,6 @@ systemctl daemon-reload
 systemctl enable odoo17 --now
 
 systemctl status odoo17
+
+
+#https://www.odoo.com/documentation/17.0/applications/general/developer_mode.html
