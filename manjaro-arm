@@ -1,0 +1,69 @@
+
+useradd -r -s /bin/bash -c 'Odoo user'  -g odoo   -d /opt/odoo  odoo
+mkdir /opt/odoo/
+chown odoo:odoo mkdir /opt/odoo/
+
+pacman -S  postgresql 
+
+su - postgres -c "createuser -s odoo"
+
+su - odoo
+
+git clone https://github.com/odoo/odoo.git --depth 1 
+
+python3 -m venv odoo17-venv
+source odoo17-venv/bin/activate
+pip3 install wheel
+pip3 install -r odoo/requirements.txt
+
+pip3 install python-ldap
+pip3 install pypdf2
+pip3 install psycopg2
+pip3 install werkzeug
+pip3 install passlib
+pip install Pillow
+pip install reportlab
+
+mkdir /opt/odoo/odoo17/custom-addons/
+deactivate && exit
+
+
+
+nano /etc/odoo17.conf
+
+[options]
+#admin_passwd = m0d1fyth15
+db_host = False
+db_port = False
+db_user = odoo
+db_password = False
+addons_path = /opt/odoo/odoo17/addons,/opt/odoo/odoo17/custom-addons
+xmlrpc_port = 8069
+
+
+nano /etc/systemd/system/odoo17.service
+
+[Unit]
+Description=Odoo17
+Requires=postgresql.service
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+SyslogIdentifier=odoo17
+PermissionsStartOnly=true
+User=odoo
+Group=odoo
+ExecStart=/opt/odoo/odoo17-venv/bin/python3 /opt/odoo/odoo17/odoo-bin -c /etc/odoo17.conf
+StandardOutput=journal+console
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+systemctl daemon-reload
+
+systemctl start odoo17
+
+systemctl status odoo17
