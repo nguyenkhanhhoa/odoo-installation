@@ -1,3 +1,4 @@
+#Manjaro ARM minimal am6 plus
 
 useradd -r -s /bin/bash -c 'Odoo user'  -g odoo   -d /opt/odoo  odoo
 mkdir /opt/odoo/
