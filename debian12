@@ -20,15 +20,15 @@ su - postgres -c "createuser -s odoo"
 
 su - odoo
 
-git clone https://github.com/odoo/odoo.git --depth 1 --branch 16.0 odoo16
+git clone https://github.com/odoo/odoo.git --depth 1
 
-python3 -m venv odoo16-venv
+python3 -m venv odoo17-venv
 
-source odoo16-venv/bin/activate
+source odoo17-venv/bin/activate
 
 pip3 install wheel
  
-pip3 install -r odoo16/requirements.txt 
+pip3 install -r odoo17/requirements.txt 
 
 pip3 install pypdf2
 
@@ -36,7 +36,7 @@ mkdir /opt/odoo/odoo16/custom-addons/
 
 deactivate && exit
 
-nano /etc/odoo16.conf
+nano /etc/odoo17.conf
 
 [options]
 #admin_passwd = m0d1fyth15
@@ -44,24 +44,24 @@ db_host = False
 db_port = False
 db_user = odoo
 db_password = False
-addons_path = /opt/odoo/odoo16/addons,/opt/odoo/odoo16/custom-addons
+addons_path = /opt/odoo/odoo17/addons,/opt/odoo/odoo17/custom-addons
 xmlrpc_port = 8069
 
 
-nano /etc/systemd/system/odoo16.service
+nano /etc/systemd/system/odoo17.service
 
 [Unit]
-Description=Odoo16
+Description=Odoo17
 Requires=postgresql.service
 After=network.target postgresql.service
 
 [Service]
 Type=simple
-SyslogIdentifier=odoo16
+SyslogIdentifier=odoo17
 PermissionsStartOnly=true
 User=odoo
 Group=odoo
-ExecStart=/opt/odoo/odoo16-venv/bin/python3 /opt/odoo/odoo16/odoo-bin -c /etc/odoo16.conf
+ExecStart=/opt/odoo/odoo17-venv/bin/python3 /opt/odoo/odoo17/odoo-bin -c /etc/odoo17.conf
 StandardOutput=journal+console
 
 [Install]
@@ -70,9 +70,9 @@ WantedBy=multi-user.target
 
 systemctl daemon-reload
 
-systemctl start odoo16
+systemctl start odoo17
 
-systemctl status odoo16
+systemctl status odoo17
 
 
 #https://www.odoo.com/documentation/17.0/applications/general/developer_mode.html
