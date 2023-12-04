@@ -17,6 +17,9 @@ apt install postgresql postgresql-client
  
 su - postgres -c "createuser -s odoo"
 
+sudo mkdir -p /usr/share/geoip && cd /usr/share/geoip
+wget https://git.io/GeoLite2-Country.mmdb   
+wget https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-City.mmdb
 
 su - odoo
 
@@ -26,13 +29,13 @@ python3 -m venv odoo17-venv
 
 source odoo17-venv/bin/activate
 
-pip3 install wheel
+#pip3 install wheel
  
 pip3 install -r odoo17/requirements.txt 
 
-pip3 install pypdf2
+#pip3 install pypdf2
 
-mkdir /opt/odoo/odoo16/custom-addons/
+mkdir /opt/odoo/odoo17/custom-addons/
 
 deactivate && exit
 
@@ -40,12 +43,18 @@ nano /etc/odoo17.conf
 
 [options]
 #admin_passwd = m0d1fyth15
+#bin_path = 
+addons_path = /opt/odoo/odoo17/addons,/opt/odoo/odoo17/custom-addons
 db_host = False
-db_port = False
+db_name = False
 db_user = odoo
 db_password = False
-addons_path = /opt/odoo/odoo17/addons,/opt/odoo/odoo17/custom-addons
-xmlrpc_port = 8069
+db_port = 5432
+http_enable = True
+http_port = 8069
+geoip_city_db = /usr/share/geoip/GeoLite2-City.mmdb
+geoip_country_db = /usr/share/geoip/GeoLite2-Country.mmdb
+
 
 
 nano /etc/systemd/system/odoo17.service
@@ -69,6 +78,8 @@ WantedBy=multi-user.target
 
 
 systemctl daemon-reload
+
+systemctl enable odoo17
 
 systemctl start odoo17
 
