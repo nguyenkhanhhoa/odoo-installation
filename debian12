@@ -52,6 +52,7 @@ db_password = False
 db_port = 5432
 http_enable = True
 http_port = 8069
+proxy_mode = True #nginx
 geoip_city_db = /usr/share/geoip/GeoLite2-City.mmdb
 geoip_country_db = /usr/share/geoip/GeoLite2-Country.mmdb
 
@@ -86,4 +87,8 @@ systemctl start odoo17
 systemctl status odoo17
 
 
-#https://www.odoo.com/documentation/17.0/applications/general/developer_mode.html
+# https://www.odoo.com/documentation/17.0/applications/general/developer_mode.html
+# https://www.odoo.com/documentation/17.0/administration/install/deploy.html
+# ln -s /etc/nginx/sites-available/odoo17.dynv6.net /etc/nginx/sites-enabled/odoo17.dynv6.net
+# certbot --nginx -d odoo17.dynv6.net
+
